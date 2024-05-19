@@ -19,5 +19,13 @@ class Product_use_case(ABC):
         raise NotImplemented
 
     @abstractmethod
+    def update_product(self, product: List[Product_domain]):
+        raise NotImplemented
+
+    @abstractmethod
+    def get_by_id(self, product_id: str) -> Product_domain:
+        raise NotImplemented
+
+    @abstractmethod
     def get_all(self) -> List[Product_domain]:
         raise NotImplemented

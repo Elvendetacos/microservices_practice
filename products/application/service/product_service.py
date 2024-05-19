@@ -14,6 +14,17 @@ class Product_service(Product_use_case):
             new_product.append(self.product_repository.add_product(product))
         return new_product
 
+    def update_product(self, product: List[Product_domain]):
+        for product in product:
+            og_product = self.product_repository.get_by_id(product.id)
+            if og_product is None:
+                raise Exception("Product not found")
+            og_product.stock = og_product.stock - product.stock
+            self.product_repository.update_product(og_product)
+
+    def get_by_id(self, product_id: str) -> Product_domain:
+        return self.product_repository.get_by_id(product_id)
+
     def delete_by_id(self, product_id: str):
         self.product_repository.delete_by_id(product_id)
 
